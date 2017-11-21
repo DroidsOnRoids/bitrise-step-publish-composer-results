@@ -20,10 +20,10 @@ set -e
 
 jq -n "$STF_DEVICE_SERIAL_LIST | length" | envman add --key STF_DEVICE_COUNT
 
-mv $composer_dir_name "docs/$BITRISE_APP_TITLE"
+mv ${composer_dir_name}/.. "docs/$BITRISE_APP_TITLE"
 git add -A
 git commit -am "$BITRISE_APP_TITLE $BITRISE_BUILD_NUMBER"
 git push origin master
 
 echo -n "unknown" | envman add --key ALL_TEST_COUNT
-echo -n "unknown" | envman add --key STF_DEVICE_COUNT
+echo -n "unknown" | envman add --key PASSED_TEST_COUNT
