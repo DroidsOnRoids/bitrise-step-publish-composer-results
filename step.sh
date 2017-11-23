@@ -17,7 +17,7 @@ if [ -z "$composer_html_dir_name" ]; then
       exit 1
 fi
 set -e
-composer_dir_name="${composer_html_dir_name}/.."
+composer_dir_name=$(realpath "${composer_html_dir_name}/..")
 
 jq -n "$STF_DEVICE_SERIAL_LIST | length" | envman add --key STF_DEVICE_COUNT
 
