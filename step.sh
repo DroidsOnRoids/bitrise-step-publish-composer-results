@@ -9,14 +9,15 @@ mkdir -p docs
 rm -rf "docs/$BITRISE_APP_TITLE"
 
 set +e
-composer_dir_name=$(find "$BITRISE_SOURCE_DIR" -path \*/composer/\*index.html | xargs dirname)/..
-if [ -z "$composer_dir_name" ]; then
+composer_html_dir_name=$(find "$BITRISE_SOURCE_DIR" -path \*/composer/\*index.html | xargs dirname)
+if [ -z "$composer_html_dir_name" ]; then
       echo -n "unknown" | envman add --key ALL_TEST_COUNT
       echo -n 0 | envman add --key PASSED_TEST_COUNT
       echo -n "irrelevant" | envman add --key STF_DEVICE_COUNT
       exit 1
 fi
 set -e
+composer_dir_name="${composer_html_dir_name}/.."
 
 jq -n "$STF_DEVICE_SERIAL_LIST | length" | envman add --key STF_DEVICE_COUNT
 
